@@ -120,6 +120,7 @@ class FeedEdit extends Component {
   };
 
   acceptPostChangeHandler = () => {
+    console.log('FeedEdit ', this.state.postForm.image.value)
     const post = {
       title: this.state.postForm.title.value,
       image: this.state.postForm.image.value,
