@@ -22,7 +22,7 @@ class Feed extends Component {
   };
 
   componentDidMount() {
-    fetch('https://nodejs-feed.herokuapp.com//auth/status', {
+    fetch('https://nodejs-feed.herokuapp.com/auth/status', {
       headers: {
         Authorization: 'Bearer '+ this.props.token
       }
@@ -43,7 +43,7 @@ class Feed extends Component {
       .catch(this.catchError);
 
     this.loadPosts();
-    const socket = openSocket('https://nodejs-feed.herokuapp.com/')
+    const socket = openSocket('https://nodejs-feed.herokuapp.com')
       socket.on('posts', data => {
         if(data.action === 'create'){
           this.addPost(data.post)
@@ -99,7 +99,7 @@ class Feed extends Component {
       this.setState({ postPage: page });
     }
     console.log('about to fetch posts')
-    fetch('https://nodejs-feed.herokuapp.com//feed/posts?page=' + page, {
+    fetch('https://nodejs-feed.herokuapp.com/feed/posts?page=' + page, {
       headers: {
         Authorization: 'Bearer '+ this.props.token
       }
@@ -134,7 +134,7 @@ class Feed extends Component {
     const formData = new FormData();
     formData.append('status', this.state.status)
 
-    fetch('https://nodejs-feed.herokuapp.com//auth/status', {
+    fetch('https://nodejs-feed.herokuapp.com/auth/status', {
       method: "PUT",
       body: formData,
       headers: {
@@ -183,10 +183,10 @@ class Feed extends Component {
 
     console.log(this.state.editPost)
 
-    let url = 'https://nodejs-feed.herokuapp.com//feed/post';
+    let url = 'https://nodejs-feed.herokuapp.com/feed/post';
     let method = 'POST'
     if (this.state.editPost) {
-      url = 'https://nodejs-feed.herokuapp.com//feed/post/' + this.state.editPost._id;
+      url = 'https://nodejs-feed.herokuapp.com/feed/post/' + this.state.editPost._id;
       method = 'PUT'
     }
 
@@ -237,7 +237,7 @@ class Feed extends Component {
 
   deletePostHandler = postId => {
     this.setState({ postsLoading: true });
-    fetch('https://nodejs-feed.herokuapp.com//feed/post/' + postId, {
+    fetch('https://nodejs-feed.herokuapp.com/feed/post/' + postId, {
       method: "DELETE",
       headers: {
         Authorization: 'Bearer '+ this.props.token

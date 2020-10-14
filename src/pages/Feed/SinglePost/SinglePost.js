@@ -14,7 +14,7 @@ class SinglePost extends Component {
 
   componentDidMount() {
     const postId = this.props.match.params.postId;
-    fetch('https://nodejs-feed.herokuapp.com//feed/post/' + postId, {
+    fetch('https://nodejs-feed.herokuapp.com/feed/post/' + postId, {
       headers: {
         Authorization: 'Bearer '+ this.props.token
       }
@@ -28,7 +28,7 @@ class SinglePost extends Component {
       .then(resData => {
         this.setState({
           title: resData.post.title,
-          image: 'https://nodejs-feed.herokuapp.com//' + resData.post.imageUrl,
+          image: 'https://nodejs-feed.herokuapp.com/' + resData.post.imageUrl,
           author: resData.post.creator.name,
           date: new Date(resData.post.createdAt).toLocaleDateString('en-US'),
           content: resData.post.content
