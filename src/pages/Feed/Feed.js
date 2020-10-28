@@ -28,16 +28,13 @@ class Feed extends Component {
       }
     })
       .then(res => {
-        console.log(res)
 
         if (res.status !== 200) {
-          console.log('failed')
           throw new Error('Failed to fetch user status.');
         }
         return res.json();
       })
       .then(resData => {
-        console.log(resData)
         this.setState({ status: resData.status });
       })
       .catch(this.catchError);
@@ -50,7 +47,6 @@ class Feed extends Component {
         } else if (data.action === 'update'){
           this.updatePost(data.post);
         } else if (data.action === 'delete'){
-          console.log('action received, deleting post from dom')
           this.loadPosts();
         }
       })
@@ -98,24 +94,20 @@ class Feed extends Component {
       page--;
       this.setState({ postPage: page });
     }
-    console.log('about to fetch posts')
     fetch('https://nodejs-feed.herokuapp.com/feed/posts?page=' + page, {
       headers: {
         Authorization: 'Bearer '+ this.props.token
       }
     })
       .then(res => {
-        console.log('fetched posts')
         if (res.status !== 200) {
           throw new Error('Failed to fetch posts.');
         }
         return res.json();
       })
       .then(resData => {
-        console.log('about to map posts from db')
         this.setState({
           posts: resData.posts.map(post => {
-            console.log('post')
             return {
               ...post,
               imagePath: post.imageUrl
@@ -147,9 +139,7 @@ class Feed extends Component {
         }
         return res.json();
       })
-      .then(resData => {
-        console.log(resData);
-      })
+      
       .catch(this.catchError);
   };
 
@@ -204,13 +194,6 @@ class Feed extends Component {
       })
       .then(resData => {
 
-        // const post = {
-        //   _id: resData.post._id,
-        //   title: resData.post.title,
-        //   content: resData.post.content,
-        //   creator: resData.post.creator,
-        //   createdAt: resData.post.createdAt
-        // };
         this.setState(prevState => {
           return {
             isEditing: false,
@@ -243,20 +226,13 @@ class Feed extends Component {
       }
     })
       .then(res => {
-        console.log('request sent, post deleted')
         if (res.status !== 200 && res.status !== 201) {
           throw new Error('Deleting a post failed!');
         }
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
-        console.log('finna bouta load the posts')
         this.loadPosts();
-        // this.setState(prevState => {
-        //   const updatedPosts = prevState.posts.filter(p => p._id !== postId);
-        //   return { posts: updatedPosts, postsLoading: false };
-        // });
       })
       .catch(err => {
         console.log(err);
@@ -270,7 +246,6 @@ class Feed extends Component {
   };
 
   catchError = error => {
-    console.log('catching error')
     this.setState({ error: error });
   };
 

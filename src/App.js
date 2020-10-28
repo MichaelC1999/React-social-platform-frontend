@@ -80,7 +80,6 @@ class App extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
         this.setState({
           isAuth: true,
           token: resData.token,
@@ -108,7 +107,6 @@ class App extends Component {
 
   signupHandler = (event, authData) => {
     event.preventDefault();
-    console.log(authData)
     this.setState({ authLoading: true });
     fetch('https://nodejs-feed.herokuapp.com/auth/signup', {
       method: 'PUT',
@@ -134,7 +132,6 @@ class App extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
         this.setState({ isAuth: false, authLoading: false });
         this.props.history.replace('/');
       })
