@@ -181,7 +181,6 @@ class Feed extends Component {
     formData.append('content', postData.content);
     formData.append('image', postData.image);
 
-    console.log(postData.image)
 
     let url = 'https://nodejs-feed.herokuapp.com/feed/post';
     let method = 'POST'

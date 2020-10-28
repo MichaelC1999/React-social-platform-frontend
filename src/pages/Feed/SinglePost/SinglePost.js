@@ -28,7 +28,7 @@ class SinglePost extends Component {
       .then(resData => {
         this.setState({
           title: resData.post.title,
-          image: 'https://nodejs-feed.herokuapp.com/' + resData.post.imageUrl,
+          image: resData.post.imageUrl,
           author: resData.post.creator.name,
           date: new Date(resData.post.createdAt).toLocaleDateString('en-US'),
           content: resData.post.content
